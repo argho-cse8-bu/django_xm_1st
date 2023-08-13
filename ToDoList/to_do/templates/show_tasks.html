@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+<div style="width:50%;margin:auto">
+    <h1>List of Tasks</h1>
+    <table class="table table-bordered table-white">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Status</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{task.taskTitle}}</td>
+                <td>{{task.taskDescription}}</td>
+                <td>
+                    {% if task.is_completed %}
+                        Complete
+                    {% else %}
+                        Incomplete
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'delete_task' taskTitle=task.taskTitle %}" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="{% url 'edit_task' taskTitle=task.taskTitle %}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{% url 'complete_task' taskTitle=task.taskTitle %}" class="btn btn-warning btn-sm">Complete</a>
+
+                </td>
+                <!-- <td>@mdo</td> -->
+              </tr>
+            {% endfor %}
+          
+          
+        </tbody>
+      </table>
+</div>
+
+{% endblock %}
